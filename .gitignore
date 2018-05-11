@@ -1,0 +1,9 @@
+# Pycharm
+.idea/
+
+# VENV
+bin/
+include/
+lib/
+pip-selfcheck.json
+
