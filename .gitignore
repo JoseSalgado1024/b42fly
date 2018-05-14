@@ -10,3 +10,6 @@ pip-selfcheck.json
 # Python 
 .pyc
 
+# DJANGO
+__pycache__
+*.sqlite3
