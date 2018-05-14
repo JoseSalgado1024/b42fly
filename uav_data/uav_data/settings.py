@@ -37,7 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_swagger',
+    'rest_framework',
+    'social_django',
+    'social_django_mongoengine',
+    'api'
+
 ]
+
+SOCIAL_AUTH_STORAGE = 'social_django_mongoengine.models.DjangoStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
