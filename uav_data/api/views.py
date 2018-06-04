@@ -47,12 +47,25 @@ class AreaFeatureRUDView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AreaFeatureSerializerRUD
 
 
+class ExtraFieldsLCView(generics.ListCreateAPIView):
+    queryset = ExtraField.objects.all()
+    serializer_class = ExtraFieldSerializer
+
+
+class ExtraFieldsRUDView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ExtraField.objects.all()
+    serializer_class = ExtraFieldSerializer
+
+
 class SearchNearObjects(APIView):
     model = None
     serializer = None
 
-    def near_objects(self, poly, buffer):
-        qs = self.model.objects.filter(point__distance_lte=(poly, D(m=buffer)))
+    def near_objects(self, poly, buffer, object_type='point'):
+        if object_type not in ['point', 'polygon']:
+            raise ValueError('objects_type: must be a str\'s instance and object_type in %s' % ['point', 'polygon'])
+        q = {'%s__distance_lte' % object_type: (poly, D(m=buffer))}
+        qs = self.model.objects.filter(**q)
         return self.serializer(qs, many=True).data
 
 

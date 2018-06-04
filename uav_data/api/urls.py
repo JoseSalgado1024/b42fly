@@ -3,6 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('extras/', views.ExtraFieldsLCView.as_view(), name='extra-lc'),
+    path('extras/<str:pk>', views.ExtraFieldsRUDView.as_view(), name='extra-rud'),
     path('policy/', views.PolicyLCView.as_view(), name='policy-lc'),
     path('policy/<str:pk>/', views.PolicyRUDView.as_view(), name='policy-rud'),
     path('collection/', views.GeometryCollectionLCView.as_view(), name='collection-lc'),
@@ -16,5 +18,5 @@ urlpatterns = [
     path('area/', views.AreaFeatureLCView.as_view(), name='area-lc'),
     path('area/near/<lng>/<lat>/<buffer>/',
          views.SearchNearPoints.as_view(), name='area-search'),
-    path('area/<str:pk>/', views.PointFeatureRUDView.as_view(), name='area-rud'),
+    path('area/<str:pk>/', views.AreaFeatureRUDView.as_view(), name='area-rud'),
 ]

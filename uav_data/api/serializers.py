@@ -2,6 +2,12 @@ from rest_framework.serializers import *
 from .models import *
 
 
+class ExtraFieldSerializer(ModelSerializer):
+    class Meta:
+        model = ExtraField
+        fields = ('key', 'value', )
+
+
 class PolicySerializer(ModelSerializer):
     class Meta:
         model = Policy
@@ -27,8 +33,10 @@ class GeometryCollectionSerializer(ModelSerializer):
         points = PointFeatureLCSerializer(PointFeature.objects.filter(geometry_collection=instance.identifier),
                                           many=True)
         areas = AreaFeatureSerializerLC(AreaFeature.objects.filter(geometry_collection=instance.identifier), many=True)
+        extras = ExtraFieldSerializer(ExtraField.objects.filter(geometry_collection=instance.identifier), many=True)
         response = ModelSerializer.to_representation(self, instance)
         response.update({
+            'extras': extras.data,
             'points': points.data,
             'areas': areas.data
         })

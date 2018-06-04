@@ -120,7 +120,7 @@ class GeometryCollectionTestCase(TestCase):
         response = self.client.post('/api/v1/collection/', self.test_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_01_serialize_all_fields(self):
+    def test_05_serialize_all_fields(self):
         """
 
         """
@@ -129,11 +129,12 @@ class GeometryCollectionTestCase(TestCase):
         test_data = self.test_data.copy()
         test_data.update({
             'points': [],
+            'extras': [],
             'areas': [],
         })
         self.assertEqual(sorted(my_geometry_collection_serializer.data), sorted(test_data))
 
-    def test_02_serialize_list_fields(self):
+    def test_06_serialize_list_fields(self):
         """
 
         """
@@ -275,8 +276,7 @@ class PointAreaFeatureModelTest(TestCase):
         _polygon.save()
         endpoint = '/api/v1/area/%s/' % _polygon.identifier
         response = self.client.get(endpoint)
-        print(response)
-        # self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_08_polygon_feature_add_view(self):
         """
