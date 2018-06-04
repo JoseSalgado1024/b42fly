@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.4"
+  - "3.5"
+  - "3.5-dev"  # 3.5 development branch
+  - "3.6"
+  - "3.6-dev"  # 3.6 development branch
+  - "3.7-dev"  # 3.7 development branch
+# command to install dependencies
+virtualenv:
+  system_site_packages: true
+
+install:
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+# command to run tests
+script:
+  - coverage run --source='api' uav_data/manage.py test api && coverage report
