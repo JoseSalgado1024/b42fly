@@ -1,0 +1,5 @@
+{
+  "identifier":"uuid-forbidden-zones-geometry",
+  "name": "forbidden-zones",
+  "description": "Forbidden zones polygons."
+}

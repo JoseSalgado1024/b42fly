@@ -27,6 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# APP CONFIGS
+
+# DB CONFIGS
+DATABASE_HOST = os.environ.get('DATABASE_HOST', 'localhost')
+DATABASE_NAME = os.environ.get('DATABASE_NAME', 'b4ufly')
+DATABASE_USER = os.environ.get('DATABASE_USER', 'postgres')
+DATABASE_PASS = os.environ.get('DATABASE_PASS', '123456')
+DATABASE_PORT = os.environ.get('DATABASE_PORT', '5432')
+
 
 # Application definition
 
@@ -37,15 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'rest_framework_swagger',
     'rest_framework',
-    'social_django',
-    'social_django_mongoengine',
-    'api'
-
+    'rest_framework_gis',
+    'api',
 ]
-
-SOCIAL_AUTH_STORAGE = 'social_django_mongoengine.models.DjangoStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,16 +83,33 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'uav_data.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
+DATABASES_AVAILABLE = {
+    'production': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASS,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
+    },
+    # development-db
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASS,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
     }
 }
+
+DEFAULT_DB = 'default'
+selected_database = os.environ.get('SELECTED_DB', DEFAULT_DB)
+if selected_database not in DATABASES_AVAILABLE.keys():
+    selected_database = DEFAULT_DB
+
+SOUTH_TESTS_MIGRATE = False
+DATABASES = {'default': DATABASES_AVAILABLE[selected_database]}
 
 
 # Password validation

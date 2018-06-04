@@ -1,0 +1,11 @@
+{
+  "identifier":"uuid-forbidden-policy",
+  "name": "forbidden-zones",
+  "description": "Forbidden areas to uav s operation",
+  "max_operator_distance": 0.0,
+  "top_altitude": 0.0,
+  "max_uav_weight": 0.0,
+  "start_at": "2018-06-01 04:20:00",
+  "expiration_time": null,
+  "don_t_expire": true
+}

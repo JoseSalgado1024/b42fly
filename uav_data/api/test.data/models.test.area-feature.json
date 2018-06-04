@@ -1,0 +1,16 @@
+{
+  "polygon":
+        [
+          [-58.3827665,-34.6044961],
+          [-58.3815178,-34.6050878],
+          [-58.3803998,-34.6042641],
+          [-58.3804763,-34.603177],
+          [-58.3816686,-34.6024608],
+          [-58.3828317,-34.603222],
+          [-58.3827665,-34.6044961]
+        ],
+  "identifier":"uuid-forbidden-zones-geometry-object",
+  "name": "forbidden-objects",
+  "description": "Forbidden objects polygons."
+}
+

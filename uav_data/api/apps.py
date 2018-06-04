@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ApiConfig(AppConfig):
     name = 'api'
-    verbose_name='API de datos b4uflygs'
+    verbose_name = 'b4ufly-ws'
