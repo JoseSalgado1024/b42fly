@@ -13,3 +13,8 @@ pip-selfcheck.json
 # DJANGO
 __pycache__
 *.sqlite3
+api/migrations/
+
+# Test
+.coverage
+
