@@ -1,8 +1,13 @@
 # api/urls.py
 from django.urls import path
 from . import views
+from django.conf.urls import url, include
 
 urlpatterns = [
+    url('^$', views.index),
+    url(r'^dashboard', views.dashboard),
+    url(r'^', include('django.contrib.auth.urls')),
+    url(r'^', include('social_django.urls')),
     path('extras/', views.ExtraFieldsLCView.as_view(), name='extra-lc'),
     path('extras/<str:pk>', views.ExtraFieldsRUDView.as_view(), name='extra-rud'),
     path('policy/', views.PolicyLCView.as_view(), name='policy-lc'),

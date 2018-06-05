@@ -25,7 +25,7 @@ SECRET_KEY = 'ofc3jb-vsm6ho7hj*$=qp1!i(5lr6lkurne2l&6$afv3l!ymw7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # APP CONFIGS
 
@@ -50,8 +50,29 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'rest_framework',
     'rest_framework_gis',
+    'social_django',
     'api',
 ]
+
+
+# SOCIAL AUTH LIB SETTINGS
+SOCIAL_AUTH_TRAILING_SLASH = False
+SOCIAL_AUTH_AUTH0_DOMAIN = 'mdps.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY = '3I1g9oEfHJs3RXH52IYf55qnEpBSQljO'
+SOCIAL_AUTH_AUTH0_SECRET = 'JzG0sjFZZOWuuCk7Xuwj_IjBym121vOVkkG0TFGweriERYGdRxx6y2sexlMwvTFj'
+SOCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile'
+]
+AUTHENTICATION_BACKENDS = {
+    'api.custom_auth_backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend'
+}
+LOGOUT_URL = "/api/v1/logout"
+LOGIN_URL = "/api/v1/login/auth0"
+LOGIN_REDIRECT_URL = "/api/v1/dashboard"
+LOGOUT_REDIRECT_URL = "/api/v1/collection/"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -135,15 +156,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
